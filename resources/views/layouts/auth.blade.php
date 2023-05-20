@@ -48,7 +48,7 @@
     <!-- Custom -->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
 
-    <title>@yield('title', 'Auth | Bank Syariah Indonesia - UAE')</title>
+    <title>@yield('title', 'Auth | SIM-KU')</title>
 </head>
 
 <body>
@@ -56,18 +56,18 @@
         <div class="col-12 col-lg-6 bg-primary-4 hp-bg-color-dark-90 position-relative auth-image">
             <div class="row hp-image-row h-100 px-8 px-sm-16 px-md-0 pb-32 pb-sm-0 pt-32 pt-md-0">
                 <div class="col-12 hp-logo-item m-16 m-sm-32 m-md-64 w-auto px-0">
-                    <img class="hp-dark-none" src="../../../app-assets/img/logo/logo-vector-blue.svg" alt="Logo">
-                    <img class="hp-dark-block" src="../../../app-assets/img/logo/logo-vector.svg" alt="Logo">
+                    <img class="hp-dark-none" src="../../../app-assets/img/logo/logo-dark.png" alt="Logo" width="70px" height="30px">
+                    <img class="hp-dark-block" src="../../../app-assets/img/logo/simku-logo-big.png" alt="Logo">
                 </div>
 
                 <div class="col-12">
                     <div class="row align-items-center justify-content-center h-100">
                         <div class="col-12 col-md-10 hp-bg-item text-center mt-64 mb-32 mb-md-0">
                             <img class="hp-dark-none m-auto"
-                                src="../../../app-assets/img/pages/authentication/authentication-bg.svg"
+                                src="../../../app-assets/img/logo/simku-logo-big.png"
                                 alt="Background Image">
                             <img class="hp-dark-block m-auto"
-                                src="../../../app-assets/img/pages/authentication/authentication-bg-dark.svg"
+                                src="../../../app-assets/img/logo/logo-dark.png"
                                 alt="Background Image">
                         </div>
 

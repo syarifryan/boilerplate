@@ -2,15 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\SuperUser;
+use App\Models\Pekerjaan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
-use Carbon\Carbon;
 use Spatie\Permission\Models\Permission;
-use Spatie\Permission\PermissionRegistrar;
+use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
 {
@@ -20,82 +16,179 @@ class UserSeeder extends Seeder
      * @return void
      */
     public function run()
-    {   
-        // Reset cached roles and permissions
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
-        Permission::create(['name' => 'allrole']);
+    {
+        //
 
-        $roleSuperAdmin = Role::create(['name' => 'superadmin']);
-        $roleSuperAdmin->givePermissionTo('allrole');
-        $roleSPV = Role::create(['name' => 'spv']);
-        $roleSPV->givePermissionTo('allrole');
-        $roleSales = Role::create(['name' => 'sales']);
-        $roleSales->givePermissionTo('allrole');
-        $roleAdmin = Role::create(['name' => 'admin']);
-        $roleAdmin->givePermissionTo('allrole');
+        $superadmin = User::create([
+            "id" => 1,
+            'name' => 'Ryan',
+            'display_name' => 'superadmin display name',
+            'email' => 'ryan@simku.id',
+            'password' => bcrypt('password'),
+            'phone' => '08112233445',
+            'address' => 'Jl. Jendral Soedirman',
+            "departement" => "Superadmin",
+            'status' => 1,
+        ]);
+
+        $user = User::create([
+            "id" => 2,
+            "name" => "User 1",
+            "display_name" => "user 1 display name",
+            "email" => "user@simku.id",
+            'password' => bcrypt('password'),
+            "phone" => "082233335555",
+            "address" => "Jalan Mawar No. 4",
+            "departement" => "User",
+            "status" => 1,
+        ]);
+
         
-        $superadmin = SuperUser::create([
-            'id_client'         => '1',
-            'id_regency'        => '1',
-            'id_district'       => '1',    
-            'nama_user'          => 'SuperAdmin',
-            'email_user'         => 'superadmin@gmail.com',
-            'password'      => Hash::make('superadmin'),
-            'hp_user'       =>  '081123123321',
-            'alamat_user'   => "Jl. Sudirman",
-            'email_verified_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-            // 'api_token'     => Str::random(10),
-        ]);
-        $superadmin->assignRole($roleSuperAdmin);
 
-        $spv = SuperUser::create([
-            'id_client'         => '1',
-            'id_regency'        => '0',
-            'id_district'       => '0', 
-            'nama_user'          => 'SPV',
-            'email_user'         => 'spv@gmail.com',
-            'password'      => Hash::make('spv'),
-            'hp_user'       =>  '081123123321',
-            'alamat_user'   => "Jl. Sudirman",
-            'email_verified_at'=> Carbon::now()->format('Y-m-d H:i:s'),
-            // 'api_token'     => Str::random(10),
-        ]);
-        $spv->assignRole($roleSPV);
+        // Reset cached roles and permissions
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        $sales = SuperUser::create([
-            'id_client'         => '1',
-            'id_regency'        => '0',
-            'id_district'       => '0', 
-            'nama_user'          => 'Sales',
-            'email_user'         => 'spv@gmail.com',
-            'password'          => Hash::make('spv'),
-            'hp_user'       =>  '081123123321',
-            'alamat_user'   => "Jl. Sudirman",
-            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            // 'api_token'     => Str::random(10),
-        ]);
-        $spv->assignRole($roleSales);
+        $arrayOfPermissionNames = [
+        
+        //MASTER
+            //kualitas
+            'kualitas-index',
+            'kualitas-add',
+            'kualitas-update',
+            'kualitas-delete',
+            //sensor
+            'sensor-index',
+            'sensor-add',
+            'sensor-update',
+            'sensor-delete',
+            //tsukamoto
+            'tsukamoto-index',
+            'tsukamoto-add',
+            'tsukamoto-update',
+            'tsukamoto-delete',
+            //rules
+            'rules-index',
+            'rules-add',
+            'rules-update',
+            'rules-delete',
+            //handle
+            'handle-index',
+            'handle-add',
+            'handle-update',
+            'handle-delete',
+        
+        //SETTINGS
+            //user
+            'user-index',
+            'user-add',
+            'user-update',
+            'user-delete',
+            //role
+            'role-index',
+            'role-add',
+            'role-update',
+            'role-delete',
+            //permission
+            'permission-index',
+            'permission-add',
+            'permission-update',
+            'permission-delete',
+            //profile
+            'profile-index',
+            'profile-edit',
+        ];
 
-        $admin = SuperUser::create([
-            'id_client'         => '1',
-            'id_regency'        => '0',
-            'id_district'       => '0', 
-            'nama_user'          => 'Admin',
-            'email_user'         => 'admin@gmail.com',
-            'password'          => Hash::make('admin'),
-            'hp_user'       =>  '081123123321',
-            'alamat_user'   => "Jl. Sudirman",
-            'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
-            // 'api_token'     => Str::random(10),
-        ]);
-        $admin->assignRole($roleAdmin);
+        $permissions = collect($arrayOfPermissionNames)->map(function ($permission) {
+            return ['name' => $permission, 'guard_name' => 'web'];
+        });
+
+        Permission::insert($permissions->toArray());
+
+        //ROLE SUPERADMIN
+        $role = Role::create(['name' => 'Superadmin'])
+            ->givePermissionTo([
+         //MASTER
+            //kualitas
+            'kualitas-index',
+            'kualitas-add',
+            'kualitas-update',
+            'kualitas-delete',
+            //sensor
+            'sensor-index',
+            'sensor-add',
+            'sensor-update',
+            'sensor-delete',
+            //tsukamoto
+            'tsukamoto-index',
+            'tsukamoto-add',
+            'tsukamoto-update',
+            'tsukamoto-delete',
+            //rules
+            'rules-index',
+            'rules-add',
+            'rules-update',
+            'rules-delete',
+            //handle
+            'handle-index',
+            'handle-add',
+            'handle-update',
+            'handle-delete',
+        
+        //SETTINGS
+            //user
+            'user-index',
+            'user-add',
+            'user-update',
+            'user-delete',
+            //role
+            'role-index',
+            'role-add',
+            'role-update',
+            'role-delete',
+            //permission
+            'permission-index',
+            'permission-add',
+            'permission-update',
+            'permission-delete',
+            //profile
+            'profile-index',
+            'profile-edit',
+            ]);
+
+        $superadmin = $superadmin->fresh();
+        $superadmin->syncRoles(['superadmin']);
+
+        
+        //ROLE ADMIN
+        $role = Role::create(['name' => 'User'])
+        ->givePermissionTo([
+            //MASTER
+                //pameran
+                // 'pameran-index',
+                // 'pameran-add',
+                // 'pameran-update',
+                // 'pameran-delete',
+                //rules
+                'rules-index',
+                // 'rules-add',
+                // 'rules-update',
+                // 'rules-delete',
+        
+            //SENSOR
+
+            //SETTINGS
+                //profile
+                'profile-index',
+                'profile-edit',
+            ]);
+
+            $user = $user->fresh();
+            $user->syncRoles(['user']);
 
 
-        // DB::table('super_user')->insert([
-        //     'nama_user' => Str::random(10),
-        //     'email_user' => Str::random(10).'@gmail.com',
-        //     'password' => Hash::make('password'),
-            
-        // ]);
+
+
+
+
     }
 }

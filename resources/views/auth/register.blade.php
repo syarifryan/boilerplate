@@ -1,50 +1,77 @@
-@extends('layouts.auth')
-
-@section('title', 'Resgister | Bank Syariah Indonesia - UAE')
+@extends('layouts.app')
 
 @section('content')
-<div class="col-12 col-md-9 col-xl-7 col-xxxl-5 px-8 px-sm-0 pt-24 pb-48">
-    <a href="" class="auth-back">
-        <i class="iconly-Light-ArrowLeft"></i>
-    </a>
-    <h1 class="mb-0 mb-sm-24">Create Account</h1>
-    <p class="mt-sm-8 mt-sm-0 text-black-60">Please sign up to your personal account if you want to use all our premium
-        products.</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Register') }}</div>
 
-    <form class="mt-16 mt-sm-32 mb-8">
-        <div class="mb-24">
-            <label for="registerUsername" class="form-label">Username :</label>
-            <input type="text" class="form-control" id="registerUsername">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
+
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="mb-24">
-            <label for="registerEmail" class="form-label">E-mail :</label>
-            <input type="email" class="form-control" id="registerEmail">
-        </div>
-
-        <div class="mb-24">
-            <label for="registerPassword" class="form-label">Password :</label>
-            <input type="password" class="form-control" id="registerPassword">
-        </div>
-
-        <div class="mb-24">
-            <label for="registerConfirmPassword" class="form-label">Confirm Password :</label>
-            <input type="password" class="form-control" id="registerConfirmPassword">
-        </div>
-
-        <button type="submit" class="btn btn-primary w-100">
-            Sign up
-        </button>
-    </form>
-
-    <div class="col-12 hp-form-info">
-        <span class="text-black-80 hp-text-color-dark-40 hp-caption me-4">Already have an account?</span>
-        <a class="text-primary-1 hp-text-color-dark-primary-2 hp-caption" href="auth-login.html">Login</a>
-    </div>
-
-    <div class="col-12 hp-other-links mt-24">
-        <a href="javascript:;" class="text-black-80 hp-text-color-dark-40">Privacy Policy</a>
-        <a href="javascript:;" class="text-black-80 hp-text-color-dark-40">Term of use</a>
     </div>
 </div>
 @endsection

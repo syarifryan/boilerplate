@@ -1,127 +1,127 @@
-// Area Chart
-let optionsAreaChart = {
-    series: [
-        {
-            name: "Visit",
-            data: [
-                10877, 29334, 33233, 36439, 32675, 32333, 33457, 38345, 36783, 30457,
-                28459, 29840,
-            ],
-        },
-        {
-            name: "Click",
-            data: [
-                8753, 21313, 24623, 28935, 27345, 23465, 27813, 29125, 26256, 24356,
-                20233, 24570,
-            ],
-        },
-        {
-            name: "Sales",
-            data: [
-                6000, 11313, 14623, 18935, 17345, 13465, 17813, 19125, 16256, 20356,
-                16233, 14570,
-            ],
-        },
-    ],
-    chart: {
-        fontFamily: "Manrope, sans-serif",
-        type: "area",
-        height: 350,
-        toolbar: {
-            show: false,
-        },
-        zoom: {
-            enabled: false,
-        },
-    },
-    labels: {
-        style: {
-            fontSize: "14px",
-        },
-    },
+// // Area Chart
+// let optionsAreaChart = {
+//     series: [
+//         {
+//             name: "AJB",
+//             data: [
+//                 87, 21, 24, 28, 27, 23, 27, 29, 26, 35,
+//                 33, 57,
+//             ],
+//         },
+//         // {
+//         //     name: "Visit",
+//         //     data: [
+//         //         10877, 29334, 33233, 36439, 32675, 32333, 33457, 38345, 36783, 30457,
+//         //         28459, 29840,
+//         //     ],
+//         // },
+//         // {
+//         //     name: "Sales",
+//         //     data: [
+//         //         6000, 11313, 14623, 18935, 17345, 13465, 17813, 19125, 16256, 20356,
+//         //         16233, 14570,
+//         //     ],
+//         // },
+//     ],
+//     chart: {
+//         fontFamily: "Manrope, sans-serif",
+//         type: "area",
+//         height: 350,
+//         toolbar: {
+//             show: false,
+//         },
+//         zoom: {
+//             enabled: false,
+//         },
+//     },
+//     labels: {
+//         style: {
+//             fontSize: "14px",
+//         },
+//     },
 
-    dataLabels: {
-        enabled: false,
-    },
+//     dataLabels: {
+//         enabled: false,
+//     },
 
-    grid: {
-        borderColor: "#DFE6E9",
-        row: {
-            opacity: 0.5,
-        },
-    },
-    fill: {
-        opacity: 1,
-        type: "solid",
-    },
-    stroke: {
-        show: true,
-        width: 4,
-        curve: "straight",
-        colors: ["transparent"],
-    },
-    xaxis: {
-        axisTicks: {
-            show: false,
-            borderType: "solid",
-            color: "#78909C",
-            height: 6,
-            offsetX: 0,
-            offsetY: 0,
-        },
+//     grid: {
+//         borderColor: "#DFE6E9",
+//         row: {
+//             opacity: 0.5,
+//         },
+//     },
+//     fill: {
+//         opacity: 1,
+//         type: "solid",
+//     },
+//     stroke: {
+//         show: true,
+//         width: 4,
+//         curve: "straight",
+//         colors: ["transparent"],
+//     },
+//     xaxis: {
+//         axisTicks: {
+//             show: false,
+//             borderType: "solid",
+//             color: "#78909C",
+//             height: 6,
+//             offsetX: 0,
+//             offsetY: 0,
+//         },
 
-        labels: {
-            style: {
-                colors: ["636E72"],
-                fontSize: "14px",
-            },
-        },
-        categories: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-        ],
-    },
-    legend: {
-        horizontalAlign: "right",
-        offsetX: 40,
-        position: "top",
-        markers: {
-            radius: 12,
-        },
-    },
-    colors: ["#EBFAFA", "#55B1F3", "#02A5A1 "],
+//         labels: {
+//             style: {
+//                 colors: ["636E72"],
+//                 fontSize: "14px",
+//             },
+//         },
+//         categories: [
+//             "Jan",
+//             "Feb",
+//             "Mar",
+//             "Apr",
+//             "May",
+//             "Jun",
+//             "Jul",
+//             "Aug",
+//             "Sep",
+//             "Oct",
+//             "Nov",
+//             "Dec",
+//         ],
+//     },
+//     legend: {
+//         horizontalAlign: "right",
+//         offsetX: 40,
+//         position: "top",
+//         markers: {
+//             radius: 12,
+//         },
+//     },
+//     colors: ["#55B1F3", "#EBFAFA", "#02A5A1 "],
 
-    yaxis: {
-        labels: {
-            style: {
-                colors: ["636E72"],
-                fontSize: "14px",
-            },
-            formatter: (value) => {
-                return value / 1000 + "K";
-            },
-        },
+//     yaxis: {
+//         labels: {
+//             style: {
+//                 colors: ["636E72"],
+//                 fontSize: "14px",
+//             },
+//             // formatter: (value) => {
+//             //     return value / 1000 + "K";
+//             // },
+//         },
 
-        min: 0,
-        max: 40000,
-        tickAmount: 4,
-    },
-};
+//         min: 0,
+//         max: 100,
+//         tickAmount: 4,
+//     },
+// };
 
-if (document.querySelector("#area-chart")) {
-    let chart = new ApexCharts(document.querySelector("#area-chart"), optionsAreaChart);
-    chart.render();
-}
+// if (document.querySelector("#area-chart")) {
+//     let chart = new ApexCharts(document.querySelector("#area-chart"), optionsAreaChart);
+//     chart.render();
+// }
 
 // Bar Chart
 let optionsBarChart = {
@@ -423,14 +423,21 @@ if (document.querySelector("#candlestick-chart")) {
 let optionsColumnChart = {
     series: [
         {
-            name: "Earning",
+            name: "Reservasi",
             data: [
-                28877, 29334, 33233, 36439, 32675, 32333, 33457, 38345, 36783, 39457,
+                20000, 29334, 33233, 36439, 32675, 32333, 33457, 38345, 36783, 39457,
                 22459, 39840,
             ],
         },
         {
-            name: "Expense",
+            name: "Booking",
+            data: [
+                12010, 11313, 14623, 18935, 17345, 13465, 17813, 19125, 16256, 20356,
+                12233, 14570,
+            ],
+        },
+        {
+            name: "Kontrak",
             data: [
                 12010, 11313, 14623, 18935, 17345, 13465, 17813, 19125, 16256, 20356,
                 12233, 14570,
@@ -782,118 +789,118 @@ if (document.querySelector("#heatmap-chart")) {
 }
 
 // Line Chart
-let optionsLineChart = {
-    series: [
-        {
-            name: "Ads",
-            data: [
-                28877, 29334, 33233, 36439, 32675, 32333, 33457, 38345, 36783, 39457,
-                22459, 39840,
-            ],
-        },
-        {
-            name: "Organic",
-            data: [
-                12010, 11313, 14623, 18935, 17345, 13465, 17813, 19125, 16256, 20356,
-                12233, 14570,
-            ],
-        },
-    ],
-    chart: {
-        fontFamily: "Manrope, sans-serif",
-        type: "line",
-        height: 350,
-        toolbar: {
-            show: false,
-        },
-        zoom: {
-            enabled: false,
-        },
-    },
-    colors: ["#009490", "#1BE7FF"],
-    labels: {
-        style: {
-            fontSize: "14px",
-        },
-    },
+// let optionsLineChart = {
+//     series: [
+//         {
+//             name: "Produce",
+//             data: [
+//                 28877, 29334, 33233, 36439, 32675, 32333, 33457, 38345, 36783, 39457,
+//                 22459, 39840,
+//             ],
+//         },
+//         {
+//             name: "Sell",
+//             data: [
+//                 12010, 11313, 14623, 18935, 17345, 13465, 17813, 19125, 16256, 20356,
+//                 12233, 14570,
+//             ],
+//         },
+//     ],
+//     chart: {
+//         fontFamily: "Manrope, sans-serif",
+//         type: "line",
+//         height: 350,
+//         toolbar: {
+//             show: false,
+//         },
+//         zoom: {
+//             enabled: false,
+//         },
+//     },
+//     colors: ["#009490", "#1BE7FF"],
+//     labels: {
+//         style: {
+//             fontSize: "14px",
+//         },
+//     },
 
-    dataLabels: {
-        enabled: false,
-    },
+//     dataLabels: {
+//         enabled: false,
+//     },
 
-    grid: {
-        borderColor: "#DFE6E9",
-        row: {
-            opacity: 0.5,
-        },
-    },
+//     grid: {
+//         borderColor: "#DFE6E9",
+//         row: {
+//             opacity: 0.5,
+//         },
+//     },
 
-    markers: {
-        strokeWidth: 0,
-        size: 6,
-        colors: ["#009490", "#1BE7FF"],
-        hover: {
-            sizeOffset: 1,
-        },
-    },
-    xaxis: {
-        axisTicks: {
-            show: false,
-            borderType: "solid",
-            color: "#78909C",
-            height: 6,
-            offsetX: 0,
-            offsetY: 0,
-        },
+//     markers: {
+//         strokeWidth: 0,
+//         size: 6,
+//         colors: ["#009490", "#1BE7FF"],
+//         hover: {
+//             sizeOffset: 1,
+//         },
+//     },
+//     xaxis: {
+//         axisTicks: {
+//             show: false,
+//             borderType: "solid",
+//             color: "#78909C",
+//             height: 6,
+//             offsetX: 0,
+//             offsetY: 0,
+//         },
 
-        tickPlacement: "between",
-        labels: {
-            style: {
-                colors: ["636E72"],
-                fontSize: "14px",
-            },
-        },
-        categories: [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-        ],
-    },
-    legend: {
-        horizontalAlign: "right",
-        offsetX: 40,
-        position: "top",
-    },
-    yaxis: {
-        labels: {
-            style: {
-                colors: ["636E72"],
-                fontSize: "14px",
-            },
-            formatter: (value) => {
-                return value / 1000 + "K";
-            },
-        },
+//         tickPlacement: "between",
+//         labels: {
+//             style: {
+//                 colors: ["636E72"],
+//                 fontSize: "14px",
+//             },
+//         },
+//         categories: [
+//             "Jan",
+//             "Feb",
+//             "Mar",
+//             "Apr",
+//             "May",
+//             "Jun",
+//             "Jul",
+//             "Aug",
+//             "Sep",
+//             "Oct",
+//             "Nov",
+//             "Dec",
+//         ],
+//     },
+//     legend: {
+//         horizontalAlign: "right",
+//         offsetX: 40,
+//         position: "top",
+//     },
+//     yaxis: {
+//         labels: {
+//             style: {
+//                 colors: ["636E72"],
+//                 fontSize: "14px",
+//             },
+//             formatter: (value) => {
+//                 return value / 1000 + "K";
+//             },
+//         },
 
-        min: 0,
-        max: 40000,
-        tickAmount: 4,
-    },
-};
+//         min: 0,
+//         max: 40000,
+//         tickAmount: 4,
+//     },
+// };
 
-if (document.querySelector("#line-chart")) {
-    let chart = new ApexCharts(document.querySelector("#line-chart"), optionsLineChart);
-    chart.render();
-}
+// if (document.querySelector("#line-chart")) {
+//     let chart = new ApexCharts(document.querySelector("#line-chart"), optionsLineChart);
+//     chart.render();
+// }
 
 // Radar Chart
 let optionsRadarChart = {
@@ -1055,197 +1062,197 @@ if (document.querySelector("#radialbar-chart")) {
 }
 
 // Scatter Chart
-let optionsScatterChart = {
-    series: [
-        {
-            name: "Nike",
-            data: [
-                [16.4, 5.4],
-                [21.7, 2],
-                [25.4, 3],
-                [19, 2],
-                [10.9, 1],
-                [13.6, 3.2],
-                [10.9, 7.4],
-                [10.9, 0],
-                [10.9, 8.2],
-                [16.4, 0],
-                [16.4, 1.8],
-                [13.6, 0.3],
-                [13.6, 0],
-                [29.9, 0],
-                [27.1, 2.3],
-                [16.4, 0],
-                [13.6, 3.7],
-                [10.9, 5.2],
-                [16.4, 6.5],
-                [10.9, 0],
-                [24.5, 7.1],
-                [10.9, 0],
-                [8.1, 4.7],
-                [19, 0],
-                [21.7, 1.8],
-                [27.1, 0],
-                [24.5, 0],
-                [27.1, 0],
-                [29.9, 1.5],
-                [27.1, 0.8],
-                [22.1, 2],
-            ],
-        },
-        {
-            name: "Adidas",
-            data: [
-                [36.4, 13.4],
-                [1.7, 11],
-                [5.4, 8],
-                [9, 17],
-                [1.9, 4],
-                [3.6, 12.2],
-                [1.9, 14.4],
-                [1.9, 9],
-                [1.9, 13.2],
-                [1.4, 7],
-                [6.4, 8.8],
-                [3.6, 4.3],
-                [1.6, 10],
-                [9.9, 2],
-                [7.1, 15],
-                [1.4, 0],
-                [3.6, 13.7],
-                [1.9, 15.2],
-                [6.4, 16.5],
-                [0.9, 10],
-                [4.5, 17.1],
-                [10.9, 10],
-                [0.1, 14.7],
-                [9, 10],
-                [12.7, 11.8],
-                [2.1, 10],
-                [2.5, 10],
-                [27.1, 10],
-                [2.9, 11.5],
-                [7.1, 10.8],
-                [2.1, 12],
-            ],
-        },
-        {
-            name: "Puma",
-            data: [
-                [21.7, 3],
-                [23.6, 3.5],
-                [24.6, 3],
-                [29.9, 3],
-                [21.7, 20],
-                [23, 2],
-                [10.9, 3],
-                [28, 4],
-                [27.1, 0.3],
-                [16.4, 4],
-                [13.6, 0],
-                [19, 5],
-                [22.4, 3],
-                [24.5, 3],
-                [32.6, 3],
-                [27.1, 4],
-                [29.6, 6],
-                [31.6, 8],
-                [21.6, 5],
-                [20.9, 4],
-                [22.4, 0],
-                [32.6, 10.3],
-                [29.7, 20.8],
-                [24.5, 0.8],
-                [21.4, 0],
-                [21.7, 6.9],
-                [28.6, 7.7],
-                [15.4, 0],
-                [18.1, 0],
-                [33.4, 0],
-                [16.4, 0],
-            ],
-        },
-    ],
-    chart: {
-        fontFamily: "Manrope, sans-serif",
-        type: "scatter",
-        height: 350,
-        toolbar: {
-            show: false,
-        },
-        zoom: {
-            enabled: true,
-        },
-    },
-    labels: {
-        style: {
-            fontSize: "14px",
-        },
-    },
+// let optionsScatterChart = {
+//     series: [
+//         {
+//             name: "Reservasi",
+//             data: [
+//                 [16.4, 5.4],
+//                 [21.7, 2],
+//                 [25.4, 3],
+//                 [19, 2],
+//                 [10.9, 1],
+//                 [13.6, 3.2],
+//                 [10.9, 7.4],
+//                 [10.9, 0],
+//                 [10.9, 8.2],
+//                 [16.4, 0],
+//                 [16.4, 1.8],
+//                 [13.6, 0.3],
+//                 [13.6, 0],
+//                 [29.9, 0],
+//                 [27.1, 2.3],
+//                 [16.4, 0],
+//                 [13.6, 3.7],
+//                 [10.9, 5.2],
+//                 [16.4, 6.5],
+//                 [10.9, 0],
+//                 [24.5, 7.1],
+//                 [10.9, 0],
+//                 [8.1, 4.7],
+//                 [19, 0],
+//                 [21.7, 1.8],
+//                 [27.1, 0],
+//                 [24.5, 0],
+//                 [27.1, 0],
+//                 [29.9, 1.5],
+//                 [27.1, 0.8],
+//                 [22.1, 2],
+//             ],
+//         },
+//         {
+//             name: "Booking",
+//             data: [
+//                 [36.4, 13.4],
+//                 [1.7, 11],
+//                 [5.4, 8],
+//                 [9, 17],
+//                 [1.9, 4],
+//                 [3.6, 12.2],
+//                 [1.9, 14.4],
+//                 [1.9, 9],
+//                 [1.9, 13.2],
+//                 [1.4, 7],
+//                 [6.4, 8.8],
+//                 [3.6, 4.3],
+//                 [1.6, 10],
+//                 [9.9, 2],
+//                 [7.1, 15],
+//                 [1.4, 0],
+//                 [3.6, 13.7],
+//                 [1.9, 15.2],
+//                 [6.4, 16.5],
+//                 [0.9, 10],
+//                 [4.5, 17.1],
+//                 [10.9, 10],
+//                 [0.1, 14.7],
+//                 [9, 10],
+//                 [12.7, 11.8],
+//                 [2.1, 10],
+//                 [2.5, 10],
+//                 [27.1, 10],
+//                 [2.9, 11.5],
+//                 [7.1, 10.8],
+//                 [2.1, 12],
+//             ],
+//         },
+//         {
+//             name: "Kontrak",
+//             data: [
+//                 [21.7, 3],
+//                 [23.6, 3.5],
+//                 [24.6, 3],
+//                 [29.9, 3],
+//                 [21.7, 20],
+//                 [23, 2],
+//                 [10.9, 3],
+//                 [28, 4],
+//                 [27.1, 0.3],
+//                 [16.4, 4],
+//                 [13.6, 0],
+//                 [19, 5],
+//                 [22.4, 3],
+//                 [24.5, 3],
+//                 [32.6, 3],
+//                 [27.1, 4],
+//                 [29.6, 6],
+//                 [31.6, 8],
+//                 [21.6, 5],
+//                 [20.9, 4],
+//                 [22.4, 0],
+//                 [32.6, 10.3],
+//                 [29.7, 20.8],
+//                 [24.5, 0.8],
+//                 [21.4, 0],
+//                 [21.7, 6.9],
+//                 [28.6, 7.7],
+//                 [15.4, 0],
+//                 [18.1, 0],
+//                 [33.4, 0],
+//                 [16.4, 0],
+//             ],
+//         },
+//     ],
+//     chart: {
+//         fontFamily: "Manrope, sans-serif",
+//         type: "scatter",
+//         height: 350,
+//         toolbar: {
+//             show: false,
+//         },
+//         zoom: {
+//             enabled: true,
+//         },
+//     },
+//     labels: {
+//         style: {
+//             fontSize: "14px",
+//         },
+//     },
 
-    dataLabels: {
-        enabled: false,
-    },
+//     dataLabels: {
+//         enabled: false,
+//     },
 
-    grid: {
-        borderColor: "#DFE6E9",
-        row: {
-            opacity: 0.5,
-        },
-    },
-    fill: {
-        opacity: 1,
-        type: "solid",
-    },
-    stroke: {
-        show: true,
-        width: 4,
-        curve: "straight",
-        colors: ["transparent"],
-    },
-    xaxis: {
-        axisTicks: {
-            show: false,
-        },
+//     grid: {
+//         borderColor: "#DFE6E9",
+//         row: {
+//             opacity: 0.5,
+//         },
+//     },
+//     fill: {
+//         opacity: 1,
+//         type: "solid",
+//     },
+//     stroke: {
+//         show: true,
+//         width: 4,
+//         curve: "straight",
+//         colors: ["transparent"],
+//     },
+//     xaxis: {
+//         axisTicks: {
+//             show: false,
+//         },
 
-        tickAmount: 10,
-        labels: {
-            style: {
-                colors: ["636E72"],
-                fontSize: "14px",
-            },
-            formatter: function (val) {
-                return parseFloat(val).toFixed(1);
-            },
-        },
-    },
+//         tickAmount: 10,
+//         labels: {
+//             style: {
+//                 colors: ["636E72"],
+//                 fontSize: "14px",
+//             },
+//             formatter: function (val) {
+//                 return parseFloat(val).toFixed(1);
+//             },
+//         },
+//     },
 
-    legend: {
-        horizontalAlign: "right",
-        offsetX: 40,
-        position: "top",
-        markers: {
-            radius: 12,
-        },
-    },
-    colors: ["#28a745", "#55B1F3", "#02A5A1 "],
+//     legend: {
+//         horizontalAlign: "right",
+//         offsetX: 40,
+//         position: "top",
+//         markers: {
+//             radius: 12,
+//         },
+//     },
+//     colors: ["#28a745", "#55B1F3", "#02A5A1 "],
 
-    yaxis: {
-        labels: {
-            style: {
-                colors: ["636E72"],
-                fontSize: "14px",
-            },
-        },
+//     yaxis: {
+//         labels: {
+//             style: {
+//                 colors: ["636E72"],
+//                 fontSize: "14px",
+//             },
+//         },
 
-        tickAmount: 7,
-    },
-};
+//         tickAmount: 7,
+//     },
+// };
 
-if (document.querySelector("#scatter-chart")) {
-    let chart = new ApexCharts(document.querySelector("#scatter-chart"), optionsScatterChart);
-    chart.render();
-}
+// if (document.querySelector("#scatter-chart")) {
+//     let chart = new ApexCharts(document.querySelector("#scatter-chart"), optionsScatterChart);
+//     chart.render();
+// }
 
 // Dashboard Ecommerce Earning Donut Card
 let optionsEcommerceEarningDonutCard = {

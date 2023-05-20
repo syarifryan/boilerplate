@@ -9,12 +9,15 @@
             </div>
 
             <div class="modal-body text-center">
-                <h3 class="h3">Are you sure you want to sign out?</h3>
+                <h4 class="h4">Are you sure you want to sign out?</h4>
             </div>
 
             <div class="modal-footer justify-content-center">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-outline-danger">Logout</button>
+                <form action="{{ route('logout') }}" method="POST"> 
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger">Logout</button>
+                </form>
             </div>
         </div>
     </div>

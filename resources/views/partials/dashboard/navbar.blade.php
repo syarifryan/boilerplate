@@ -29,32 +29,35 @@
                                     <span class="d-block h5 hp-text-color-black-100 hp-text-color-dark-0 mb-6">Profile
                                         Settings</span>
 
-                                    <a href="profile-information.html"
+                                    <a href="{{route('dashboard.user.profile')}}"
                                         class="hp-p1-body hp-text-color-primary-1 hp-text-color-dark-primary-2 hp-hover-text-color-primary-2">View
                                         Profile</a>
 
                                     <div class="divider my-12"></div>
 
                                     <div class="row">
+                                        @can('user-index')
                                         <div class="col-12">
-                                            <a href="app-contact.html"
-                                                class="d-flex align-items-center hp-p1-body py-4 px-10 hp-transition hp-hover-bg-primary-4 hp-hover-bg-dark-primary hp-hover-bg-dark-80 rounded"
-                                                style="margin-left: -10px; margin-right: -10px;">
-                                                <i class="iconly-Curved-People me-8" style="font-size: 16px;"></i>
-
-                                                <span class="ml-8">Explore Creators</span>
-                                            </a>
+                                            <a href="{{route('dashboard.user.index')}}"
+                                            class="d-flex align-items-center hp-p1-body py-4 px-10 hp-transition hp-hover-bg-primary-4 hp-hover-bg-dark-primary hp-hover-bg-dark-80 rounded"
+                                            style="margin-left: -10px; margin-right: -10px;">
+                                            <i class="iconly-Curved-People me-8" style="font-size: 16px;"></i>
+                                            
+                                            <span class="ml-8">Explore Users</span>
+                                        </a>
                                         </div>
-
+                                        @endcan
+                                        @can('role-index')
                                         <div class="col-12">
-                                            <a href="page-knowledge-base-1.html"
-                                                class="d-flex align-items-center hp-p1-body py-4 px-10 hp-transition hp-hover-bg-primary-4 hp-hover-bg-dark-primary hp-hover-bg-dark-80 rounded"
-                                                style="margin-left: -10px; margin-right: -10px;">
-                                                <i class="iconly-Curved-Game me-8" style="font-size: 16px;"></i>
-
-                                                <span class="hp-ml-8">Help Desk</span>
-                                            </a>
+                                            <a href="{{route('dashboard.user.role.index')}}"
+                                            class="d-flex align-items-center hp-p1-body py-4 px-10 hp-transition hp-hover-bg-primary-4 hp-hover-bg-dark-primary hp-hover-bg-dark-80 rounded"
+                                            style="margin-left: -10px; margin-right: -10px;">
+                                            <i class="iconly-Light-Lock me-8" style="font-size: 16px;"></i>
+                                            
+                                            <span class="hp-ml-8">Role & Permission</span>
+                                        </a>
                                         </div>
+                                        @endcan
                                     </div>
 
                                     <div class="divider my-12"></div>

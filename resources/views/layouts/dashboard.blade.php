@@ -8,6 +8,7 @@
 
     <meta name="author" content="Hypeople">
     <meta name="description" content="Responsive, Highly Customizable Dashboard Template" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('app-assets/favicon/apple-touch-icon.png')}}">
@@ -24,6 +25,13 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/icons/remix-icon/index.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/colors.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src = "/googlecharts/loader.js"></script>
+    <script src = "https://www.gstatic.com/charts/loader.js"></script>
 
     <!-- Base -->
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/base/font-control.css')}}">
@@ -38,16 +46,19 @@
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/layouts/sider.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/layouts/header.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/components.css')}}">
-    
+
     <!-- Customizer -->
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/layouts/customizer.css')}}">
 
     <!-- Pages -->
     <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/pages/app-contact.css')}}">
 
+    <!-- Select2 -->
+    <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/select2/select2.css')}}">
+
     @yield('css')
 
-    <title>@yield('title', 'Bank Syariah Indonesia - UAE')</title>
+    <title>@yield('title', 'SIM-KU')</title>
 </head>
 
 <body>
@@ -82,7 +93,7 @@
             <div class="offcanvas offcanvas-start hp-mobile-sidebar" tabindex="-1" id="mobileMenu"
                 aria-labelledby="mobileMenuLabel" style="width: 256px;">
                 <div class="offcanvas-header justify-content-between align-items-end me-16 ms-24 mt-16 p-0">
-                    
+
                     @include('partials.dashboard.logo')
 
                     <div class="w-auto px-0 hp-sidebar-collapse-button hp-sidebar-hidden" data-bs-dismiss="offcanvas"
@@ -103,7 +114,7 @@
                                     </button>
                                 </div>
                             </div>
-                            
+
                             @include('partials.dashboard.sidebar')
                         </div>
                     </div>
@@ -140,23 +151,38 @@
 
     <!-- Plugin -->
     <script src="{{asset('app-assets/js/plugin/jquery.min.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="{{asset('app-assets/js/plugin/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('app-assets/js/plugin/swiper-bundle.min.js')}}"></script>
     <script src="{{asset('app-assets/js/plugin/jquery.mask.min.js')}}"></script>
     <script src="{{asset('app-assets/js/plugin/autocomplete.min.js')}}"></script>
     <script src="{{asset('app-assets/js/plugin/moment.min.js')}}"></script>
     <script src="{{asset('app-assets/js/croppie.js')}}"></script>
+    <script src="{{asset('app-assets/js/plugin/apex-chart.js')}}"></script>
+    <script src="{{asset('app-assets/js/plugin/apexcharts.min.js')}}"></script>
+    
 
     <!-- Layouts -->
     <script src="{{asset('app-assets/js/layouts/header-search.js')}}"></script>
     <script src="{{asset('app-assets/js/layouts/sider.js')}}"></script>
     <script src="{{asset('app-assets/js/components/input-number.js')}}"></script>
 
+    <!-- Charts -->
+    <script src="{{asset('app-assets/js/charts/apex-chart.js')}}"></script>
+    <script src="{{asset('app-assets/js/charts/apex-chart.min.js')}}"></script>
+
     <!-- Base -->
     <script src="{{asset('app-assets/js/base/index.js')}}"></script>
 
     <!-- Customizer -->
     <script src="{{asset('app-assets/js/customizer.js')}}"></script>
+
+    <!-- PHP JS -->
+    <script src="{{asset('app-assets/js/phpjs/variable.min.js')}}"></script>
+
+    <!-- Select2 -->
+    <script src="{{asset('app-assets/js/select2/select2.js')}}"></script>
 
     @yield('js')
 

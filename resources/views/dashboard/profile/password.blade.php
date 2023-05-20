@@ -1,10 +1,9 @@
 @extends('layouts.dashboard')
 
-@section('title', 'User | Bank Syariah Indonesia - UAE')
+@section('title', 'Password | Jidoka.id ')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/pages/page-profile.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/croppie.css')}}">
 <style>
     #upload-demo {
         width: 250px;
@@ -32,8 +31,12 @@
 
                             <ul class="dropdown-menu" aria-labelledby="profile-menu-dropdown">
                                 <li>
-                                    <a class="dropdown-item" href="javascript:;">Change Avatar</a>
-                                    <a class="dropdown-item text-danger" href="javascript:;">Delete Avatar</a>
+                                    <form action="{{route("dashboard.user.deletePhotoPic", Auth::user()->id)}}" id="deleteProfilePic" method="post">
+                                    @csrf
+                                    @method("delete")
+                                    </form>
+                                    <a class="dropdown-item" href="#" onclick="showModalUpload()">Change Avatar</a>
+                                    <a class="dropdown-item text-danger"  href="#" onclick="deletePhotoPic();" >Delete Avatar</a>
                                 </li>
                             </ul>
                         </div>
@@ -42,13 +45,14 @@
                             <div class="d-inline-block position-relative">
                                 <div class="avatar-item d-flex align-items-center justify-content-center rounded-circle"
                                     style="width: 80px; height: 80px;">
-                                    <img src="{{asset('app-assets/img/default-profile.svg')}}">
+                                    <img id="item-img-output" src="{{Auth::user()->picture != null ? '/storage/image_uploaded/'.Auth::user()->picture : asset('app-assets/img/default-profile.svg')}}"
+                                    style="width: 80px; height: 80px; object-fit:cover;">
                                 </div>
                             </div>
                         </div>
 
-                        <h4 class="mt-24 mb-4">John Doe</h4>
-                        <a href="mailto:dolores@yoda.com" class="hp-p1-body">johndoe@example.com</a>
+                        <h4 class="mt-24 mb-4">{{Auth::user()->display_name == "" ? Auth::user()->name : Auth::user()->display_name}}</h4>
+                        <a href="mailto:{{Auth::user()->email}}" class="hp-p1-body">{{Auth::user()->email}}</a>
                     </div>
                 </div>
 
@@ -81,7 +85,7 @@
                 </div>
 
                 <div class="hp-profile-menu-footer text-center">
-                    <img src="{{asset('app-assets/img/pages/profile/menu-img.svg')}}" alt="Profile Image">
+                    <img src="{{asset('app-assets/img/profile-page.svg')}}" alt="Profile Image">
                 </div>
             </div>
 
@@ -90,6 +94,20 @@
                     <div class="col-12">
                         <h2>Change Password</h2>
                         <p class="hp-p1-body mb-0">Set a unique password to protect your account.</p>
+                                @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    Successfully updated data
+                                </div>
+                                @endif
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                     </div>
 
                     <div class="divider border-black-40 hp-border-color-dark-80"></div>
@@ -97,23 +115,25 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12 col-sm-8 col-md-7 col-xl-5 col-xxxl-3">
-                                <form>
+                                <form action="{{route('dashboard.user.update-password', Auth::user()->id)}}" method="POST">
+                                    @csrf
+                                    @method("PUT")
                                     <div class="mb-24">
-                                        <label for="profileOldPassword" class="form-label">Old Password :</label>
-                                        <input type="password" class="form-control" id="profileOldPassword"
+                                        <label for="old_password" class="form-label">Old Password :</label>
+                                        <input type="password" class="form-control" id="old_password" name="old_password"
                                             placeholder="Password">
                                     </div>
 
                                     <div class="mb-24">
-                                        <label for="profileNewPassword" class="form-label">New Password :</label>
-                                        <input type="password" class="form-control" id="profileNewPassword"
+                                        <label for="new_password" class="form-label">New Password :</label>
+                                        <input type="password" class="form-control" id="new_password" name="new_password"
                                             placeholder="Password">
                                     </div>
 
                                     <div class="mb-24">
-                                        <label for="profileConfirmPassword" class="form-label">Confirm New Password
+                                        <label for="password_confirmation" class="form-label">Confirm New Password
                                             :</label>
-                                        <input type="password" class="form-control" id="profileConfirmPassword"
+                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation"
                                             placeholder="Password">
                                     </div>
 
@@ -131,75 +151,30 @@
 @endsection
 
 @section('modal')
-<div class="modal fade" id="profileContactEditModal" tabindex="-1" aria-labelledby="profileContactEditModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 416px;">
-        <div class="modal-content">
-            <div class="modal-header py-16">
-                <h5 class="modal-title" id="profileContactEditModalLabel">Contact Edit</h5>
-                <button type="button" class="btn-close hp-bg-none d-flex align-items-center justify-content-center"
-                    data-bs-dismiss="modal" aria-label="Close">
-                    <i class="ri-close-line hp-text-color-dark-0 lh-1" style="font-size: 24px;"></i>
-                </button>
-            </div>
-
-            <div class="divider my-0"></div>
-
-            <div class="modal-body py-48">
-                <form>
-                    <div class="row g-24">
-                        <div class="col-12">
-                            <label for="fullName" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="fullName">
-                        </div>
-
-                        <div class="col-12">
-                            <label for="displayName" class="form-label">Display Name</label>
-                            <input type="text" class="form-control" id="displayName">
-                        </div>
-
-                        <div class="col-12">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-
-                        <div class="col-12">
-                            <label for="phone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="phone">
-                        </div>
-
-                        <div class="col-12">
-                            <label for="address" class="form-label">Address</label>
-                            <textarea name="address" id="address" class="form-control"></textarea>
-                        </div>
-
-                        <div class="col-6">
-                            <button type="button" class="btn btn-primary w-100">Edit</button>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="btn w-100" data-bs-dismiss="modal">Cancel</div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
-
-@section('modal')
-<div class="modal fade" id="ModalCropImage" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modalUploadPicture" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content card-style text-center">
-            <div class="modal-body">
-                <div class="d-flex justify-content-center align-items-center">
-                    <div id="upload-demo" class="center-block"></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="cropImageBtn" class="btn btn-primary">Crop & Update</button>
+        <div class="modal-content card-style">
+            <div class="mb-24">
+                <form id="formData" method="POST" enctype="multipart/form-data" action="{{route('dashboard.user.uploadPhotoPic')}}">
+                    @csrf
+                    <div id="method">
+                        @method("POST")
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                                <label for="name" class="form-label">
+                                <span class="text-danger me-4">*</span>
+                                File
+                                </label>
+                                <input type="file" name="picture" class="form-control" required>
+                        </div>
+                        <input type="hidden" name="id" value="{{Auth::user()->id}}" class="form-control" >
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-save">Upload</button>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
@@ -208,67 +183,42 @@
 
 
 @section('js')
-<script src="{{asset('panel/js/croppie.js')}}"></script>
 <script>
-    function changeAvatar(){
-        $("#profile-img-input").trigger('click')
+        // Sandbox upload picture 
+     function showModalUpload(){ 
+        $('#modalUploadPicture').modal('show');
     }
-
-    var uploadCrop,
-        tempFilename,
-        rawImg,
-        imageId;
-
-    function readFile(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('.upload-demo').addClass('ready');
-                $('#ModalCropImage').modal('show');
-                rawImg = e.target.result;
-            }
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            swal("Sorry - you're browser doesn't support the FileReader API");
+    function deletePhotoPic($id){ 
+        if(confirm("Are you sure you want to delete your profile photo?")){
+            $("#deleteProfilePic").submit();
         }
     }
-
-    uploadCrop = $('#upload-demo').croppie({
-        viewport: {
-            width: 200,
-            height: 200,
-        },
-        enforceBoundary: false,
-        enableExif: true
-    });
-    $('#ModalCropImage').on('shown.bs.modal', function () {
-        // alert('Shown pop');
-        uploadCrop.croppie('bind', {
-            url: rawImg
-        }).then(function () {
-            console.log('jQuery bind complete');
-        });
-    });
-
-    $('.item-img').on('change', function () {
-        imageId = $(this).data('id');
-        tempFilename = $(this).val();
-        $('#cancelCropBtn').data('id', imageId);
-        readFile(this);
-    });
-    $('#cropImageBtn').on('click', function (ev) {
-        uploadCrop.croppie('result', {
-            type: 'base64',
-            format: 'jpeg',
-            size: {
-                width: 100,
-                height: 100
+    function uploadPicture(picture, id){ 
+        let csrf_token = $('meta[name="csrf-token"]').attr('content');
+        
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': csrf_token
             }
-        }).then(function (resp) {
-            $('#item-img-output').attr('src', resp);
-            $('#ModalCropImage').modal('hide');
         });
-    });
+        $.ajax({
+            url: "{{route('dashboard.user.uploadPhotoPic')}}",
+            type: "POST", 
+            data: {"picture": picture, "id":id},headers: {
+                'X-CSRF-Token': csrf_token
+            },
+            success: function(res){
+                ;
+            }
+        }).fail(function(xhr, textstatus, errorThrown){
+            console.log("error details: ");
+            console.log(xhr);
+            console.log(textstatus);
+            console.log(errorThrown);
+        });
+    }
 
+    // End of sandbox
 </script>
 @endsection

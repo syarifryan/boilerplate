@@ -30,8 +30,8 @@
         <div class="hp-theme-customizer-container-header bg-black-10 hp-bg-dark-85 py-16 px-24">
             <div class="d-flex justify-content-between">
                 <div>
-                    <span class="h5 mb-0 d-block text-black-80 hp-text-color-dark-0">Customise your YODA</span>
-                    <span class="hp-caption fw-medium d-block text-black-60">Preview in Real Time</span>
+                    <span class="h5 mb-0 d-block text-black-80 hp-text-color-dark-0">Change Website Themes</span>
+                    <span class="hp-caption fw-medium d-block text-black-60">Jidoka.id</span>
                 </div>
 
                 <div>

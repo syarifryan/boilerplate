@@ -1,10 +1,9 @@
 @extends('layouts.dashboard')
 
-@section('title', 'User | Bank Syariah Indonesia - UAE')
+@section('title', 'Profil | SIM - KU ')
 
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/pages/page-profile.css')}}">
-<link rel="stylesheet" type="text/css" href="{{asset('app-assets/css/croppie.css')}}">
 <style>
     #upload-demo {
         width: 250px;
@@ -15,6 +14,7 @@
 @endsection
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="row mb-32 gy-32">
     <div class="col-12">
         <div class="row bg-black-0 hp-bg-color-dark-100 rounded pe-16 pe-sm-32 mx-0">
@@ -32,8 +32,12 @@
 
                             <ul class="dropdown-menu" aria-labelledby="profile-menu-dropdown">
                                 <li>
-                                    <a class="dropdown-item" href="#" onclick="changeAvatar()">Change Avatar</a>
-                                    <a class="dropdown-item text-danger" href="javascript:;">Delete Avatar</a>
+                                    <form action="{{route("dashboard.user.deletePhotoPic", Auth::user()->id)}}" id="deleteProfilePic" method="post">
+                                    @csrf
+                                    @method("delete")
+                                    </form>
+                                    <a class="dropdown-item" href="#" onclick="showModalUpload()">Change Avatar</a>
+                                    <a class="dropdown-item text-danger"  href="#" onclick="deletePhotoPic();" >Delete Avatar</a>
                                 </li>
                             </ul>
                         </div>
@@ -42,14 +46,15 @@
                             <div class="d-inline-block position-relative">
                                 <div class="avatar-item d-flex align-items-center justify-content-center rounded-circle"
                                     style="width: 80px; height: 80px;">
-                                    <img id="item-img-output" src="{{asset('app-assets/img/default-profile.svg')}}">
+                                    <img id="item-img-output" src="{{Auth::user()->picture != null ? '/storage/image_uploaded/'.Auth::user()->picture : asset('app-assets/img/default-profile.svg')}}" style="width: 80px; height: 80px; object-fit:cover;">
                                 </div>
                             </div>
                         </div>
 
-                        <h4 class="mt-24 mb-4">John Doe</h4>
-                        <span class="hp-p1-body">johndoe@example.com</span>
-                        <input id="profile-img-input" class="item-img" type="file" accept="image/*"/ hidden>
+                        <h4 class="mt-24 mb-4">{{Auth::user()->display_name == "" ? Auth::user()->name : Auth::user()->display_name}}</h4>
+                        <span class="hp-p1-body">{{Auth::user()->email}}</span>
+                      
+                        <input id="profile-img-input" class="item-img" type="file" accept="image/*"hidden/>
                     </div>
                 </div>
 
@@ -81,7 +86,7 @@
                 </div>
 
                 <div class="hp-profile-menu-footer text-center">
-                    <img src="{{asset('app-assets/img/pages/profile/menu-img.svg')}}" alt="Profile Image">
+                    <img src="{{asset('app-assets/img/profile-page.svg')}}" alt="Profile Image">
                 </div>
             </div>
 
@@ -95,45 +100,62 @@
                             </div>
 
                             <div class="col-12 col-md-6 hp-profile-action-btn text-end">
-                                <button class="btn btn-ghost btn-primary" data-bs-toggle="modal"
+                                <button class="btn btn-success" data-bs-toggle="modal" 
                                     data-bs-target="#profileContactEditModal">Edit</button>
                             </div>
 
                             <div class="divider border-black-40 hp-border-color-dark-80"></div>
 
                             <div class="col-12 hp-profile-content-list mt-8 pb-0 pb-sm-120">
+                                @if (session('status'))
+                                <div class="alert alert-success" role="alert">
+                                    {{ session('status') }}
+                                </div>
+                                @endif
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                <input type="hidden" name="user_id" id="user_id" value="{{Auth::user()->id}}">
                                 <ul>
                                     <li class="mt-16">
                                         <span class="hp-p1-body">Name</span>
                                         <span class="mt-0 mt-sm-4 hp-p1-body text-black-100 hp-text-color-dark-0">
-                                            John Doe
+                                            {{Auth::user()->name}}
                                         </span>
                                     </li>
                                     <li class="mt-16">
                                         <span class="hp-p1-body">Jabatan</span>
                                         <span class="mt-0 mt-sm-4 hp-p1-body text-black-100 hp-text-color-dark-0">
-                                            UI/X Designer
+                                            {{Auth::user()->departement == "" ? "-" : Auth::user()->departement}}
                                         </span>
                                     </li>
                                     <li class="mt-16">
                                         <span class="hp-p1-body">Email</span>
                                         <span class="mt-0 mt-sm-4 hp-p1-body text-black-100 hp-text-color-dark-0">
-                                            johndoe@example.com
+                                            {{Auth::user()->email }}
                                         </span>
                                     </li>
                                     <li class="mt-16">
                                         <span class="hp-p1-body">Phone</span>
                                         <span class="mt-0 mt-sm-4 hp-p1-body text-black-100 hp-text-color-dark-0">
-                                            +9714-9999-9999
+                                            {{Auth::user()->phone}}
                                         </span>
                                     </li>
                                     <li class="mt-16">
                                         <span class="hp-p1-body">Role</span>
                                         <span class="mt-0 mt-sm-4 hp-p1-body text-black-100 hp-text-color-dark-0">
+                                            @if (count(Auth::user()->getRoleNames()) > 0)
                                             <div
                                                 class="badge bg-primary-4 hp-bg-dark-primary text-primary border-primary">
-                                                Admin
+                                                {{Auth::user()->getRoleNames()[0]}}
                                             </div>
+                                            @endif
                                         </span>
                                     </li>
                                 </ul>
@@ -154,7 +176,7 @@
     <div class="modal-dialog modal-dialog-centered" style="max-width: 416px;">
         <div class="modal-content">
             <div class="modal-header py-16">
-                <h5 class="modal-title" id="profileContactEditModalLabel">Contact Edit</h5>
+                <h5 class="modal-title" id="profileContactEditModalLabel">Personal Information</h5>
                 <button type="button" class="btn-close hp-bg-none d-flex align-items-center justify-content-center"
                     data-bs-dismiss="modal" aria-label="Close">
                     <i class="ri-close-line hp-text-color-dark-0 lh-1" style="font-size: 24px;"></i>
@@ -164,39 +186,43 @@
             <div class="divider my-0"></div>
 
             <div class="modal-body py-48">
-                <form>
+                <form id="formData" action="{{route('dashboard.user.update-profile', Auth::user()->id)}}" method="POST">
+                    @csrf
+                    <div id="method">
+                        @method("POST")
+                    </div>
                     <div class="row g-24">
                         <div class="col-12">
                             <label for="fullName" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="fullName">
+                            <input type="text" class="form-control" id="name" name="name" value="{{Auth::user()->name}}"> 
                         </div>
 
                         <div class="col-12">
                             <label for="displayName" class="form-label">Display Name</label>
-                            <input type="text" class="form-control" id="displayName">
+                            <input type="text" class="form-control" id="display_name" name="display_name" value="{{Auth::user()->display_name}}">
                         </div>
 
                         <div class="col-12">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email">
+                            <input type="email" class="form-control" id="email" name="email" value="{{Auth::user()->email}}">
                         </div>
 
                         <div class="col-12">
                             <label for="phone" class="form-label">Phone</label>
-                            <input type="text" class="form-control" id="phone">
+                            <input type="text" class="form-control" id="phone" name="phone" value="{{Auth::user()->phone}}">
                         </div>
 
                         <div class="col-12">
                             <label for="address" class="form-label">Address</label>
-                            <textarea name="address" id="address" class="form-control"></textarea>
+                            <textarea name="address" id="address" class="form-control" name="address" >{{Auth::user()->address}}</textarea>
                         </div>
 
-                        <div class="col-6">
-                            <button type="button" class="btn btn-primary w-100">Edit</button>
-                        </div>
 
                         <div class="col-6">
                             <div class="btn w-100" data-bs-dismiss="modal">Cancel</div>
+                        </div>
+                        <div class="col-6">
+                            <button type="button" onclick="updateData()" class="btn btn-primary w-100">Save</button>
                         </div>
                     </div>
                 </form>
@@ -205,17 +231,31 @@
     </div>
 </div>
 
-<div class="modal fade" id="ModalCropImage" tabindex="-1" aria-hidden="true">
+
+<div class="modal fade" id="modalUploadPicture" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content card-style text-center">
-            <div class="modal-body">
-                <div class="d-flex justify-content-center align-items-center">
-                    <div id="upload-demo" class="center-block"></div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="cropImageBtn" class="btn btn-primary">Crop & Update</button>
+        <div class="modal-content card-style">
+            <div class="mb-24">
+                <form id="formData" method="POST" enctype="multipart/form-data" action="{{route('dashboard.user.uploadPhotoPic')}}">
+                    @csrf
+                    <div id="method">
+                        @method("POST")
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                                <label for="name" class="form-label">
+                                <span class="text-danger me-4">*</span>
+                                File
+                                </label>
+                                <input type="file" name="picture" class="form-control" required>
+                        </div>
+                        <input type="hidden" name="id" value="{{Auth::user()->id}}" class="form-control" >
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-save">Upload</button>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
@@ -223,67 +263,66 @@
 @endsection
 
 @section('js')
-<script src="{{asset('panel/js/croppie.js')}}"></script>
 <script>
-    function changeAvatar(){
-        $("#profile-img-input").trigger('click')
+    let loading = '<div class="spinner-border spinner-border-sm ml-3" role="status"></div>'
+
+    function fillDetailData(response){
+        
+        $("#user_id").val(response.id.toString());
+        $("#title").val(response.title);
+        $("#link").val(response.link);
+        $("#status").val(response.status).change();
     }
 
-    var uploadCrop,
-        tempFilename,
-        rawImg,
-        imageId;
-
-    function readFile(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('.upload-demo').addClass('ready');
-                $('#ModalCropImage').modal('show');
-                rawImg = e.target.result;
-            }
-            reader.readAsDataURL(input.files[0]);
+    function updateData(){
+        const id = $("#user_id").val();
+        if(id != null && id != undefined){
+            $(".btn-save").append(loading);
+            $("#formData").attr("method", "POST");
+            $("#formData").attr("action", "{{route('dashboard.user.update-profile', ':id')}}".replace(":id", id)); 
+            $("#method").html(`@method('PUT')`); 
+            $("#formData").submit(); 
         } else {
-            swal("Sorry - you're browser doesn't support the FileReader API");
+            alert("Cannot update data, id not found");
         }
     }
 
-    uploadCrop = $('#upload-demo').croppie({
-        viewport: {
-            width: 200,
-            height: 200,
-        },
-        enforceBoundary: false,
-        enableExif: true
-    });
-    $('#ModalCropImage').on('shown.bs.modal', function () {
-        // alert('Shown pop');
-        uploadCrop.croppie('bind', {
-            url: rawImg
-        }).then(function () {
-            console.log('jQuery bind complete');
-        });
-    });
-
-    $('.item-img').on('change', function () {
-        imageId = $(this).data('id');
-        tempFilename = $(this).val();
-        $('#cancelCropBtn').data('id', imageId);
-        readFile(this);
-    });
-    $('#cropImageBtn').on('click', function (ev) {
-        uploadCrop.croppie('result', {
-            type: 'base64',
-            format: 'jpeg',
-            size: {
-                width: 100,
-                height: 100
+    // Sandbox upload picture 
+    function showModalUpload(){ 
+        $('#modalUploadPicture').modal('show');
+    }
+    function deletePhotoPic($id){ 
+        if(confirm("Are you sure you want to delete your profile photo?")){
+            $("#deleteProfilePic").submit();
+        }
+    }
+    function uploadPicture(picture, id){ 
+        let csrf_token = $('meta[name="csrf-token"]').attr('content');
+        
+        
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-Token': csrf_token
             }
-        }).then(function (resp) {
-            $('#item-img-output').attr('src', resp);
-            $('#ModalCropImage').modal('hide');
         });
-    });
+        $.ajax({
+            url: "{{route('dashboard.user.uploadPhotoPic')}}",
+            type: "POST", 
+            data: {"picture": picture, "id":id},headers: {
+                'X-CSRF-Token': csrf_token
+            },
+            success: function(res){
+                ;
+            }
+        }).fail(function(xhr, textstatus, errorThrown){
+            console.log("error details: ");
+            console.log(xhr);
+            console.log(textstatus);
+            console.log(errorThrown);
+        });
+    }
+
+    // End of sandbox
 
 </script>
 @endsection
