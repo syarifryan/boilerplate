@@ -13,78 +13,47 @@
                     </span>
                 </a>
             </li>
+            @can('article-index')
+            <li>
+                <a href="{{route('dashboard.article.index')}}">
+                    <span>
+                        <i class="iconly-Curved-Document"></i>
+                        <span>Article</span>
+                    </span>
+                </a>
+            </li>
+            @endcan
         </ul>
     </li>
 
     <li>
         <div class="menu-title">MASTER</div>
         <ul>
+            @can('news-index')
             <li>
-                <a href="{{route('dashboard.kualitas-udara.index')}}">
-                    <div class="tooltip-item in-active" data-bs-toggle="tooltip" data-bs-placement="right" title=""
-                        data-bs-original-title="User" aria-label="User"></div>
+                <a href="javascript:;" class="submenu-item">
                     <span>
-                        <i class="iconly-Curved-Home"></i>
-                        <span>Kualitas Udara</span>
+                        <i class="iconly-Curved-Document"></i>
+                        <span>News</span>
                     </span>
+
+                    <div class="menu-arrow"></div>
                 </a>
+
+                <ul class="submenu-children" data-level="1">
+                    <li>
+                        <a href="{{url('/dashboard/news')}}">
+                            <span>Add Article</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('news.category.index')}}">
+                            <span>Category</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li>
-                <a href="{{route('dashboard.sensor.index')}}">
-                    <div class="tooltip-item in-active" data-bs-toggle="tooltip" data-bs-placement="right" title=""
-                        data-bs-original-title="Sensor" aria-label="Sensor"></div>
-                    <span>
-                        <i class="iconly-Curved-Home"></i>
-                        <span>Sensor</span>
-                    </span>
-                </a>
-            </li>
-            <li>
-                <a href="{{route('dashboard.fuzzy-tsukamoto.index')}}">
-                    <div class="tooltip-item in-active" data-bs-toggle="tooltip" data-bs-placement="right" title=""
-                        data-bs-original-title="User" aria-label="User"></div>
-                    <span>
-                        <i class="iconly-Curved-Home"></i>
-                        <span>Fuzzy Tsukamoto</span>
-                    </span>
-                </a>
-            </li>
-            <li>
-                @can('rules-index')
-                <a href="{{route('dashboard.fuzzy-rules.index')}}">
-                    <div class="tooltip-item in-active" data-bs-toggle="tooltip" data-bs-placement="right" title=""
-                        data-bs-original-title="User" aria-label="User"></div>
-                    <span>
-                        <i class="iconly-Curved-Home"></i>
-                        <span>Fuzzy Rules</span>
-                    </span>
-                </a>
-                @endcan
-            </li>
-            <li>
-                @can('handle-index')
-                <a href="{{route('dashboard.handle.index')}}">
-                    <div class="tooltip-item in-active" data-bs-toggle="tooltip" data-bs-placement="right" title=""
-                        data-bs-original-title="User" aria-label="User"></div>
-                    <span>
-                        <i class="iconly-Curved-Home"></i>
-                        <span>Penanganan</span>
-                    </span>
-                </a>
-                @endcan
-            </li>
-            <li>
-                {{-- @can('proses-index') --}}
-                <a href="{{route('dashboard.proses.index')}}">
-                    <div class="tooltip-item in-active" data-bs-toggle="tooltip" data-bs-placement="right" title=""
-                        data-bs-original-title="User" aria-label="User"></div>
-                    <span>
-                        <i class="iconly-Curved-Home"></i>
-                        <span>Proses</span>
-                    </span>
-                </a>
-                {{-- @endcan --}}
-            </li>
+            @endcan
         </ul>
     </li>
     

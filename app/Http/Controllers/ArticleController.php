@@ -2,54 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DataSensor;
+use App\Http\Controllers\Controller;
+use App\Repositories\NewsCategoryRepository;
+use App\Repositories\NewsRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class SensorController extends Controller
+class ArticleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $newsRepository; 
+    private $newsCatRepository; 
+
+    public function __construct(
+    NewsRepository $newsRepository,  
+    NewsCategoryRepository $newsCatRepository 
+    )
+
+    { 
+        $this->newsRepository = $newsRepository;
+        $this->newsCatRepository = $newsCatRepository;
+    }
+
     public function index()
     {
-        return view ('dashboard.sensor.index');
+        $news = $this->newsRepository->get();
+        return view("dashboard.article.index", compact("news"));
     }
-
-
-    public function getDataSensor(Request $request){
-
-        $id_from_url = $request->get('id');
-        $data = DataSensor::orderBy('created_at')->take(10)->get()->reverse()->values();
-
-        return response()->json($data);
+    public function showByCategory($category_title)
+    {
+        $category = $this->newsCatRepository->getByTitle($category_title);
+        $news = $this->newsRepository->getByCategory($category->id);
+        // Footer
+        return view("dashboard.article.category", compact("category", "news"));
     }
-
-    public function getDataSensorAll(){
-        $data = DataSensor::orderBy('created_at', 'desc')->take(20)->get()->reverse()->values();
-        return response()->json($data);
-    }
-
-    public function getOneLastDataSensor(){
-
-        $data = DataSensor::orderBy('created_at', 'desc')->latest()->first();
-
-        if ($data->count() == 0){
-            // return response error untuk ajax
-            return response()->json(['error' => 'Data tidak ditemukan'], 400);
-
-        } else {
-            // return response success untuk ajax
-            return response()->json($data);
-        }
-
-        // $data = sensor::orderBy('tanggal', 'desc')->latest()->first();
-        return response()->json($data);
-    }
-
-
 
     /**
      * Show the form for creating a new resource.
@@ -78,9 +62,13 @@ class SensorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $news = $this->newsRepository->getBySlug($slug);
+        $categories = $this->newsCatRepository->get();
+
+        return view("dashboard.article.detail", compact("news", "categories"));
+    
     }
 
     /**

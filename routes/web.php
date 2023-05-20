@@ -1,15 +1,12 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\HandleController;
-use App\Http\Controllers\KualitasUdaraController;
+use App\Http\Controllers\NewsCategoryController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProsesController;
 use App\Http\Controllers\RoleController;
-use App\Http\Controllers\RulesController;
-use App\Http\Controllers\SensorController;
-use App\Http\Controllers\TsukamotoController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,60 +34,37 @@ Route::get('/', function () {
 
 Route::group(['prefix'=>'dashboard', "middleware"=>"auth"], function(){
     //MAIN
-        //dashboard
+    // route dashboard
         Route::get('/', [DashboardController::class, 'index']);
         Route::get('/dashboard', [DashboardController::class, "index"])->name("dashboard.index");
+    // end route dashboard
+
+    //route article
+        Route::get('/article', [ArticleController::class, 'index'])->name("dashboard.article.index");
+        Route::get('/article/category/{category}', [ArticleController::class, "showByCategory"])->name("dashboard.article.category");
+        Route::get('/article/detail/{slug}', [ArticleController::class, "show"])->name("dashboard.article.detail");
+    //end route article
 
     //MASTER
-        //kualitas-udara
-        Route::get('/kualitas-udara',[KualitasUdaraController::class, 'index'])->name('dashboard.kualitas-udara.index');
-        Route::put('/kualitas-udara/{id}/update',[KualitasUdaraController::class, 'update'])->name('dashboard.kualitas-udara.update');
-        Route::delete('/kualitas-udara/{id}/delete',[KualitasUdaraController::class, 'destroy'])->name('dashboard.kualitas-udara.destroy');
-        Route::get('/kualitas-udara/{id}',[KualitasUdaraController::class, 'show'])->name('dashboard.kualitas-udara.show');
-        Route::post('/kualitas-udara',[KualitasUdaraController::class, 'store'])->name('dashboard.kualitas-udara.store');
+    // route news 
+        Route::get('/news/manage/create', [NewsController::class, "create"])->name("dashboard.news.create");
+        Route::get('/news/category', [NewsCategoryController::class, "index"])->name("news.category.index");
+        Route::get('/news/category/{id}', [NewsCategoryController::class, "show"])->name("news.category.show");
+        
+        Route::get('/news/manage/{id}/edit', [NewsController::class, "edit"])->name("dashboard.news.edit");
+        Route::get('/news', [NewsController::class, "index"])->name("dashboard.news.index");
+        Route::put('/news/{id}/update', [NewsController::class, "update"])->name("dashboard.news.update");
+        Route::delete('/news/{id}/destroy', [NewsController::class, "destroy"])->name("dashboard.news.destroy");
+        Route::get('/news/{id}', [NewsController::class, "show"])->name("dashboard.news.show");
+        Route::post('/news', [NewsController::class, "store"])->name("dashboard.news.store");
 
-        //tsukamoto
-        Route::get('/tsukamoto',[TsukamotoController::class, 'index'])->name('dashboard.fuzzy-tsukamoto.index');
-        Route::put('/tsukamoto/{id}/update',[TsukamotoController::class, 'update'])->name('dashboard.fuzzy-tsukamoto.update');
-        Route::delete('/tsukamoto/{id}/delete',[TsukamotoController::class, 'destroy'])->name('dashboard.fuzzy-tsukamoto.destroy');
-        Route::get('/tsukamoto/{id}',[TsukamotoController::class, 'show'])->name('dashboard.fuzzy-tsukamoto.show');
-        Route::post('/tsukamoto',[TsukamotoController::class, 'store'])->name('dashboard.fuzzy-tsukamoto.store');
-
-        //rules
-        Route::get('/rules',[RulesController::class, 'index'])->name('dashboard.fuzzy-rules.index');
-        Route::put('/rules/{id}/update',[RulesController::class, 'update'])->name('dashboard.fuzzy-rules.update');
-        Route::delete('/rules/{id}/delete',[RulesController::class, 'destroy'])->name('dashboard.fuzzy-rules.destroy');
-        Route::get('/rules/{id}',[RulesController::class, 'show'])->name('dashboard.fuzzy-rules.show');
-        Route::post('/rules',[RulesController::class, 'store'])->name('dashboard.fuzzy-rules.store');
-        Route::post('/rules/import_rules',[RulesController::class,'import_rules'])->name('dashboard.fuzzy-rules.import_rules');
-
-        //sensor
-        Route::get('/sensor',[SensorController::class, 'index'])->name('dashboard.sensor.index');
-        Route::post('/sensor/{id}/update',[SensorController::class, 'update'])->name('dashboard.sensor.update');
-        Route::post('/sensor/{id}/delete',[SensorController::class, 'destroy_sensor'])->name('dashboard.sensor.destroy');
-        Route::get('/sensor/{id}',[SensorController::class, 'show'])->name('dashboard.sensor.show');
-        Route::post('/sensor',[SensorController::class, 'store'])->name('dashboard.sensor.store');
-        Route::get('/get-one-last-data-sensor', [SensorController::class, 'getOneLastDataSensor'])->name('get-one-last-data-sensor');
-        Route::get('/get-data-sensor-all', [SensorController::class, 'getDataSensorAll'])->name('get-data-sensor-all');
-        Route::get('/get-data-sensor', [SensorController::class, 'getDataSensor'])->name('get-data-sensor');
-
-        //handle
-        Route::get('/handle',[HandleController::class, 'index'])->name('dashboard.handle.index');
-        Route::put('/handle/{id}/update',[HandleController::class, 'update'])->name('dashboard.handle.update');
-        Route::post('/handle/{id}/delete',[HandleController::class, 'destroy_handle'])->name('dashboard.handle.destroy');
-        Route::get('/handle/{id}',[HandleController::class, 'show'])->name('dashboard.handle.show');
-        Route::post('/handle',[HandleController::class, 'store'])->name('dashboard.handle.store');
-        Route::post('/handle/import_handle',[HandleController::class,'import_handle'])->name('dashboard.handle.import_handle');
-
-        //proses
-        Route::get('/proses',[ProsesController::class, 'index'])->name('dashboard.proses.index');
-        Route::post('/proses/{id}/update',[ProsesController::class, 'update'])->name('dashboard.proses.update');
-        Route::post('/proses/{id}/delete',[ProsesController::class, 'destroy_proses'])->name('dashboard.proses.destroy');
-        Route::get('/proses/{id}',[ProsesController::class, 'show'])->name('dashboard.proses.show');
-        Route::post('/proses',[ProsesController::class, 'store'])->name('dashboard.proses.store');
+        Route::put('/news/category/{id}/update', [NewsCategoryController::class, "update"])->name("news.category.update");
+        Route::delete('/news/category/{id}/destroy', [NewsCategoryController::class, "destroy"])->name("news.category.destroy");
+        Route::post('/news/category', [NewsCategoryController::class, "store"])->name("news.category.store");
+    // end route news 
 
     //SETTING
-        //user
+    // route user
         Route::get('/user', [UserController::class, "index"])->name("dashboard.user.index");
         Route::get('/user/getRole', [UserController::class, "getRole"])->name("dashboard.user.getrole");
         Route::put('/user/{id}/update', [UserController::class, "update"])->name("dashboard.user.update");
@@ -101,8 +75,9 @@ Route::group(['prefix'=>'dashboard', "middleware"=>"auth"], function(){
             Route::put('/user/{id}/update-profile', [UserController::class, "updateProfile"])->name("dashboard.user.update-profile");
             //update password
             Route::put('/user/{id}/update-password', [UserController::class, "updatePassword"])->name("dashboard.user.update-password");
+    //end route user
 
-
+    //route role & permission
         //role
         Route::get('/role', [RoleController::class, "index"])->name("dashboard.user.role.index");
         Route::put('/role/{id}/update', [RoleController::class, "update"])->name("dashboard.user.role.update");
@@ -124,12 +99,7 @@ Route::group(['prefix'=>'dashboard', "middleware"=>"auth"], function(){
         Route::get('/profile/password', function () {
             return view('dashboard.profile.password');
         });
-
-        //IndoRegion
-        //prospek
-        // Route::get('/prospek', [IndoRegionController::class, 'index'])->name("dashboard.prospek.index");
-        //profile-perusahaan
-        // Route::get('/profile-perusahaan', [IndoRegionController::class, 'index'])->name("dashboard.profile-perusahaan.index");
+    //end route role & permission
 
 
 });

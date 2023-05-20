@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Handle extends Model
+class NewsCategory extends Model
 {
     use HasFactory;
-    protected $table = "handles";
+    protected $table = "news_categories";
     protected $fillable = [
-        "id",
-        "rentang_1",
-        "rentang_2",
-        "penanganan",
+        "title"
     ];
 
+    public $timestamps = false;
 }

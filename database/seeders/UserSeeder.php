@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Pekerjaan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -21,26 +22,36 @@ class UserSeeder extends Seeder
 
         $superadmin = User::create([
             "id" => 1,
-            'name' => 'Ryan',
-            'display_name' => 'superadmin display name',
-            'email' => 'ryan@simku.id',
-            'password' => bcrypt('password'),
-            'phone' => '08112233445',
-            'address' => 'Jl. Jendral Soedirman',
+            "name" => "superadmin",
+            "display_name" => "superadmin display name",
+            "email" => "superadmin@example.com",
+            "phone" => "082233334444",
+            "address" => "Jalan Mawar No. 4",
             "departement" => "Superadmin",
-            'status' => 1,
+            "password" => Hash::make('password'),
+            "status" => 1
         ]);
-
-        $user = User::create([
+        $author = User::create([
             "id" => 2,
-            "name" => "User 1",
-            "display_name" => "user 1 display name",
-            "email" => "user@simku.id",
-            'password' => bcrypt('password'),
+            "name" => "author",
+            "display_name" => "author display name",
+            "email" => "author@example.com",
             "phone" => "082233335555",
             "address" => "Jalan Mawar No. 4",
+            "departement" => "Author",
+            "password" => Hash::make('password'),
+            "status" => 1
+        ]);
+        $user = User::create([
+            "id" => 3,
+            "name" => "user",
+            "display_name" => "user display name",
+            "email" => "user@example.com",
+            "phone" => "082233336666",
+            "address" => "Jalan Mawar No. 4",
             "departement" => "User",
-            "status" => 1,
+            "password" => Hash::make('password'),
+            "status" => 1
         ]);
 
         
@@ -49,33 +60,15 @@ class UserSeeder extends Seeder
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
         $arrayOfPermissionNames = [
-        
+        //MAIN
+            //article
+            'article-index', 
+
         //MASTER
-            //kualitas
-            'kualitas-index',
-            'kualitas-add',
-            'kualitas-update',
-            'kualitas-delete',
-            //sensor
-            'sensor-index',
-            'sensor-add',
-            'sensor-update',
-            'sensor-delete',
-            //tsukamoto
-            'tsukamoto-index',
-            'tsukamoto-add',
-            'tsukamoto-update',
-            'tsukamoto-delete',
-            //rules
-            'rules-index',
-            'rules-add',
-            'rules-update',
-            'rules-delete',
-            //handle
-            'handle-index',
-            'handle-add',
-            'handle-update',
-            'handle-delete',
+            'news-index', 
+            'news-add',
+            'news-update',
+            'news-delete',
         
         //SETTINGS
             //user
@@ -107,32 +100,16 @@ class UserSeeder extends Seeder
         //ROLE SUPERADMIN
         $role = Role::create(['name' => 'Superadmin'])
             ->givePermissionTo([
-         //MASTER
-            //kualitas
-            'kualitas-index',
-            'kualitas-add',
-            'kualitas-update',
-            'kualitas-delete',
-            //sensor
-            'sensor-index',
-            'sensor-add',
-            'sensor-update',
-            'sensor-delete',
-            //tsukamoto
-            'tsukamoto-index',
-            'tsukamoto-add',
-            'tsukamoto-update',
-            'tsukamoto-delete',
-            //rules
-            'rules-index',
-            'rules-add',
-            'rules-update',
-            'rules-delete',
-            //handle
-            'handle-index',
-            'handle-add',
-            'handle-update',
-            'handle-delete',
+        //MAIN
+            //article
+            'article-index', 
+
+        //MASTER
+            //news
+            'news-index', 
+            'news-add',
+            'news-update',
+            'news-delete',
         
         //SETTINGS
             //user
@@ -159,20 +136,36 @@ class UserSeeder extends Seeder
         $superadmin->syncRoles(['superadmin']);
 
         
-        //ROLE ADMIN
+        //ROLE Author
+        $role = Role::create(['name' => 'Author'])
+        ->givePermissionTo([
+            //MAIN
+                //article
+                'article-index', 
+                
+            //MASTER
+               //news
+               'news-index', 
+               'news-add',
+               'news-update',
+               'news-delete',
+            //SENSOR
+
+            //SETTINGS
+                //profile
+                'profile-index',
+                'profile-edit',
+            ]);
+
+            $author = $author->fresh();
+            $author->syncRoles(['author']);
+
+        //ROLE User
         $role = Role::create(['name' => 'User'])
         ->givePermissionTo([
-            //MASTER
-                //pameran
-                // 'pameran-index',
-                // 'pameran-add',
-                // 'pameran-update',
-                // 'pameran-delete',
-                //rules
-                'rules-index',
-                // 'rules-add',
-                // 'rules-update',
-                // 'rules-delete',
+            //MAIN
+            //article
+            'article-index', 
         
             //SENSOR
 

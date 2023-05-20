@@ -49,8 +49,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function pameran(){
-        return $this->hasMany(Pameran::class, 'user_id', 'id');
-    }
 
 }

@@ -33,9 +33,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-    //    $co = DataSensor::latest()->first()->get();
-       $sensor = DataSensor::orderBy('created_at', 'desc')->latest()->first();
-        return view('dashboard.index', compact('sensor'));
+        return view('dashboard.index');
     }
 
     

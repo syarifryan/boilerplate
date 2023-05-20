@@ -63,65 +63,28 @@
                                     @method("POST")
                                 </div>
                                 <tr>
-                                    <td>Kualitas Udara</td>
+                                    <td>Article</td>
                                     <td>
-                                        <input class="form-check-input" type="checkbox" value="kualitas-index" {{in_array("kualitas-index", $permission_in_role) ? "checked" : ""}} id="kualitas-index" name="kualitas-index">
+                                        <input class="form-check-input" type="checkbox" value="article-index" {{in_array("article-index", $permission_in_role) ? "checked" : ""}} id="article-index" name="article-index">
                                     </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="kualitas-add" {{in_array("kualitas-add", $permission_in_role) ? "checked" : ""}} id="kualitas-add" name="kualitas-add">
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="kualitas-update" {{in_array("kualitas-update", $permission_in_role) ? "checked" : ""}} id="kualitas-update" name="kualitas-update">
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="kualitas-delete" {{in_array("kualitas-delete", $permission_in_role) ? "checked" : ""}} id="kualitas-delete" name="kualitas-delete">
-                                    </td>
+                                    
                                 </tr>
                                 <tr>
-                                    <td>Sensor</td>
+                                    <td>News</td>
                                     <td>
-                                        <input class="form-check-input" type="checkbox" value="sensor-index" {{in_array("sensor-index", $permission_in_role) ? "checked" : ""}} id="sensor-index" name="sensor-index">
+                                        <input class="form-check-input" type="checkbox" value="news-index" {{in_array("news-index", $permission_in_role) ? "checked" : ""}} id="news-index" name="news-index">
                                     </td>
                                     <td>
-                                        <input class="form-check-input" type="checkbox" value="sensor-add" {{in_array("sensor-add", $permission_in_role) ? "checked" : ""}} id="sensor-add" name="sensor-add">
+                                        <input class="form-check-input" type="checkbox" value="news-add" {{in_array("news-add", $permission_in_role) ? "checked" : ""}} id="news-add" name="news-add">
                                     </td>
                                     <td>
-                                        <input class="form-check-input" type="checkbox" value="sensor-update" {{in_array("sensor-update", $permission_in_role) ? "checked" : ""}} id="sensor-update" name="sensor-update">
+                                        <input class="form-check-input" type="checkbox" value="news-update" {{in_array("news-update", $permission_in_role) ? "checked" : ""}} id="news-update" name="news-update">
                                     </td>
                                     <td>
-                                        <input class="form-check-input" type="checkbox" value="sensor-delete" {{in_array("sensor-delete", $permission_in_role) ? "checked" : ""}} id="sensor-delete" name="sensor-delete">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Fuzzy Tsukamoto</td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="tsukamoto-index" {{in_array("tsukamoto-index", $permission_in_role) ? "checked" : ""}} id="tsukamoto-index" name="tsukamoto-add">
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="tsukamoto-add" {{in_array("tsukamoto-add", $permission_in_role) ? "checked" : ""}} id="tsukamoto-add" name="tsukamoto-add">
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="tsukamoto-update" {{in_array("tsukamoto-update", $permission_in_role) ? "checked" : ""}} id="tsukamoto-update" name="tsukamoto-update">
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="tsukamoto-delete" {{in_array("tsukamoto-delete", $permission_in_role) ? "checked" : ""}} id="tsukamoto-delete" name="tsukamoto-delete">
+                                        <input class="form-check-input" type="checkbox" value="news-delete" {{in_array("news-delete", $permission_in_role) ? "checked" : ""}} id="news-delete" name="news-delete">
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Fuzzy Rules</td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="rules-index" {{in_array("rules-index", $permission_in_role) ? "checked" : ""}} id="rules-index" name="rules-index">
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="rules-add" {{in_array("rules-add", $permission_in_role) ? "checked" : ""}} id="rules-add" name="rules-add">
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="rules-update" {{in_array("rules-update", $permission_in_role) ? "checked" : ""}} id="rules-update" name="rules-update">
-                                    </td>
-                                    <td>
-                                        <input class="form-check-input" type="checkbox" value="rules-delete" {{in_array("rules-delete", $permission_in_role) ? "checked" : ""}} id="rules-delete" name="rules-delete">
-                                    </td>
-                                </tr>
+
                                 
                                 <tr>
                                     <td>User</td>
@@ -235,16 +198,16 @@
     
     function disableInput(){
         //CRM
-        //kualitas
-        $("#kualitas-index").attr("onclick", "return false");
-        $("#kualitas-add").attr("onclick", "return false");
-        $("#kualitas-update").attr("onclick", "return false");
-        $("#kualitas-delete").attr("onclick", "return false");
-        //sensor
-        $("#sensor-index").attr("onclick", "return false");
-        $("#sensor-add").attr("onclick", "return false");
-        $("#sensor-update").attr("onclick", "return false");
-        $("#sensor-delete").attr("onclick", "return false");
+        //article
+        $("#article-index").attr("onclick", "return false");
+        $("#article-add").attr("onclick", "return false");
+        $("#article-update").attr("onclick", "return false");
+        $("#article-delete").attr("onclick", "return false");
+        //news
+        $("#news-index").attr("onclick", "return false");
+        $("#news-add").attr("onclick", "return false");
+        $("#news-update").attr("onclick", "return false");
+        $("#news-delete").attr("onclick", "return false");
         //buku tamu
         $("#tsukamoto-index").attr("onclick", "return false");
         $("#tsukamoto-add").attr("onclick", "return false");
@@ -335,31 +298,31 @@
     function getCheckedValue(){
         let checked = [];
     //CRM
-        //kualitas
-        if($("#kualitas-index").is(":checked")){
-            checked.push("kualitas-index");
+        //article
+        if($("#article-index").is(":checked")){
+            checked.push("article-index");
         }
-        if($("#kualitas-add").is(":checked")){
-            checked.push("kualitas-add");
+        if($("#article-add").is(":checked")){
+            checked.push("article-add");
         }
-        if($("#kualitas-update").is(":checked")){
-            checked.push("kualitas-update");
+        if($("#article-update").is(":checked")){
+            checked.push("article-update");
         }
-        if($("#kualitas-delete").is(":checked")){
-            checked.push("kualitas-delete");
+        if($("#article-delete").is(":checked")){
+            checked.push("article-delete");
         }
-        //sensor
-        if($("#sensor-index").is(":checked")){
-            checked.push("sensor-index");
+        //news
+        if($("#news-index").is(":checked")){
+            checked.push("news-index");
         }
-        if($("#sensor-add").is(":checked")){
-            checked.push("sensor-add");
+        if($("#news-add").is(":checked")){
+            checked.push("news-add");
         }
-        if($("#sensor-update").is(":checked")){
-            checked.push("sensor-update");
+        if($("#news-update").is(":checked")){
+            checked.push("news-update");
         }
-        if($("#sensor-delete").is(":checked")){
-            checked.push("sensor-delete");
+        if($("#news-delete").is(":checked")){
+            checked.push("news-delete");
         }
         //buku tamu
         if($("#tsukamoto-index").is(":checked")){
@@ -578,57 +541,57 @@
     }
     function fillDetailData(response){
 
-        //kualitas
-        if(response.includes("kualitas-index")){
-            $("#kualitas-index").prop("checked", true);
+        //article
+        if(response.includes("article-index")){
+            $("#article-index").prop("checked", true);
         } else {
-            $("#kualitas-index").prop("checked", false);
+            $("#article-index").prop("checked", false);
         }
-        if(response.includes("kualitas-add")){
-            $("#kualitas-add").prop("checked", true);
+        if(response.includes("article-add")){
+            $("#article-add").prop("checked", true);
         } else {
-            $("#kualitas-add").prop("checked", false);
+            $("#article-add").prop("checked", false);
         }
-        if(response.includes("kualitas-add")){
-            $("#kualitas-add").prop("checked", true);
+        if(response.includes("article-add")){
+            $("#article-add").prop("checked", true);
         } else {
-            $("#kualitas-add").prop("checked", false);
+            $("#article-add").prop("checked", false);
         }
-        if(response.includes("kualitas-update")){
-            $("#kualitas-update").prop("checked", true);
+        if(response.includes("article-update")){
+            $("#article-update").prop("checked", true);
         } else {
-            $("#kualitas-update").prop("checked", false);
+            $("#article-update").prop("checked", false);
         }
-        if(response.includes("kualitas-delete")){
-            $("#kualitas-delete").prop("checked", true);
+        if(response.includes("article-delete")){
+            $("#article-delete").prop("checked", true);
         } else {
-            $("#kualitas-delete").prop("checked", false);
+            $("#article-delete").prop("checked", false);
         }
-        //sensor
-        if(response.includes("sensor-index")){
-            $("#sensor-index").prop("checked", true);
+        //news
+        if(response.includes("news-index")){
+            $("#news-index").prop("checked", true);
         } else {
-            $("#sensor-index").prop("checked", false);
+            $("#news-index").prop("checked", false);
         }
-        if(response.includes("sensor-add")){
-            $("#sensor-add").prop("checked", true);
+        if(response.includes("news-add")){
+            $("#news-add").prop("checked", true);
         } else {
-            $("#sensor-add").prop("checked", false);
+            $("#news-add").prop("checked", false);
         }
-        if(response.includes("sensor-add")){
-            $("#sensor-add").prop("checked", true);
+        if(response.includes("news-add")){
+            $("#news-add").prop("checked", true);
         } else {
-            $("#sensor-add").prop("checked", false);
+            $("#news-add").prop("checked", false);
         }
-        if(response.includes("sensor-update")){
-            $("#sensor-update").prop("checked", true);
+        if(response.includes("news-update")){
+            $("#news-update").prop("checked", true);
         } else {
-            $("#sensor-update").prop("checked", false);
+            $("#news-update").prop("checked", false);
         }
-        if(response.includes("sensor-delete")){
-            $("#sensor-delete").prop("checked", true);
+        if(response.includes("news-delete")){
+            $("#news-delete").prop("checked", true);
         } else {
-            $("#sensor-delete").prop("checked", false);
+            $("#news-delete").prop("checked", false);
         }
         //buku tamu
         if(response.includes("tsukamoto-index")){
@@ -928,16 +891,16 @@
     }
     function editData() {
     //CRM    
-        //kualitas
-        $('#kualitas-index').attr("onclick", "");
-        $('#kualitas-add').attr("onclick", "");
-        $('#kualitas-update').attr("onclick", "");
-        $('#kualitas-delete').attr("onclick", "");
-        //sensor
-        $('#sensor-index').attr("onclick", "");
-        $('#sensor-add').attr("onclick", "");
-        $('#sensor-update').attr("onclick", "");
-        $('#sensor-delete').attr("onclick", "");
+        //article
+        $('#article-index').attr("onclick", "");
+        $('#article-add').attr("onclick", "");
+        $('#article-update').attr("onclick", "");
+        $('#article-delete').attr("onclick", "");
+        //news
+        $('#news-index').attr("onclick", "");
+        $('#news-add').attr("onclick", "");
+        $('#news-update').attr("onclick", "");
+        $('#news-delete').attr("onclick", "");
         //buku tamu
         $("#tsukamoto-index").attr("onclick", "");
         $("#tsukamoto-add").attr("onclick", "");

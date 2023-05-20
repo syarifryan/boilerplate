@@ -58,7 +58,7 @@
 
     @yield('css')
 
-    <title>@yield('title', 'SIM-KU')</title>
+    <title>@yield('title', 'HI-Tech')</title>
 </head>
 
 <body>

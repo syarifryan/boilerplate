@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHandlesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateHandlesTable extends Migration
      */
     public function up()
     {
-        Schema::create('handles', function (Blueprint $table) {
+        Schema::create('news_categories', function (Blueprint $table) {
             $table->id();
-            $table->float('rentang_1')->nullable();
-            $table->float('rentang_2')->nullable();
-            $table->string('penanganan')->nullable();
-            $table->timestamps();
+            $table->string("title"); 
         });
     }
 
@@ -29,6 +26,6 @@ class CreateHandlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('handles');
+        Schema::dropIfExists('news_categories');
     }
-}
+};

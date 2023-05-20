@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string("picture")->nullable();
             $table->text('address')->nullable();
             $table->string('departement')->nullable();
-            $table->string('password')->default("password");
+            $table->string('password')->default("12345678");
             $table->tinyInteger("status")->default(1)->comment("1: Active, 0: Nonactive");
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
